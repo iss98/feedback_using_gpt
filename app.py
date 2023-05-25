@@ -23,10 +23,10 @@ if 'item_1a' not in st.session_state:
 #Header of page
 st.title("GPT를 활용한 평가 및 피드백 :blue[데모버전]")
 st.header("연구설명")
-st.text("이 연구는 gpt를 이용한 평가 및 피드백을 학교 현장에서 적용할 수 있는지 확인하려고 합니다. 이 페이지는 데모 페이지입니다.")
+st.write("이 연구는 gpt를 이용한 평가 및 피드백을 학교 현장에서 적용할 수 있는지 확인하려고 합니다. 이 페이지는 데모 페이지입니다.")
 st.divider()
 st.header("앞으로 정해야하는 내용")
-st.text("1. 어떤 문제를 활용해야하는지 정하기 \n 2. 어떤 prompt engineering을 사용할지 \n 3. 어떻게 하면 수업시간에 적용가능한지?")
+st.write("1. 어떤 문제를 활용해야하는지 정하기 \n 2. 어떤 prompt engineering을 사용할지 \n 3. 어떻게 하면 수업시간에 적용가능한지?")
 st.divider()
 st.header("문제 및 피드백 예시")
 st.markdown("$A \div 3y/2 = 4x^{2}y + 2xy +6$ 일 때 다항식 $A$ 를 구하시오")
@@ -50,6 +50,6 @@ else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
 if st.button("결과 제출하기"):
     csv = generate_csv(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
-    st.download_button(label = "Press to Download", data = csv, file_name = "file.xlsx", mime = "text/xlsx")
+    st.download_button(label = "Press to Download", data = csv, file_name = "file.csv", mime = "text/csv")
 
 st.text("문의 : iss9802@snu.ac.kr")
