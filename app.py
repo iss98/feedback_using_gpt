@@ -43,6 +43,7 @@ if st.button("GPT한테 피드백 받기"):
 else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
 if st.button("결과 제출하기"):
+    st.text(item1_a)
     download_results(item, problem, feedback, attempt)
 
 st.text("문의 : iss9802@snu.ac.kr")
