@@ -10,11 +10,15 @@ openai.api_key = st.secrets["api_key"]
 #학생들의 데이터를 다운로드 받기 위한 코드
 if 'item' not in st.session_state:
     st.session_state['item'] = []
-# st.session_state["item"] = []
-# problem = []
-# feedback = []
-# attempt = []
-item1_a = 0
+if 'problem' not in st.session_state:
+    st.session_state['problem'] = []
+if 'feedback' not in st.session_state:
+    st.session_state['feedback'] = []
+if 'attempt' not in st.session_state:
+    st.session_state['attempt'] = []
+if 'item_1a' not in st.session_state:
+    st.session_state['item_1a'] = 0
+
 
 #Header of page
 st.title("GPT를 활용한 평가 및 피드백 :blue[데모버전]")
@@ -29,23 +33,21 @@ st.markdown("$A \div 3y/2 = 4x^{2}y + 2xy +6$ 일 때 다항식 $A$ 를 구하�
 response = st.text_input(label = '답안 :')
 
 if st.button("GPT한테 피드백 받기"):
-    item1_a +=1
-    prompt = prompt_item1 + response
-    fb  = "322"    
-    # fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
-    # fb = fb["choices"][0]["text"]
+    st.session_state['item_1a'] +=1    
+    fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
+    fb = fb["choices"][0]["text"]
     st.session_state["item"].append(1)
-    # problem.append(response)
-    # feedback.append(fb)
-    # attempt.append(item1_a)
+    st.session_state["problem"].append(response)
+    st.session_state["feedback"].append(fb)
+    st.session_state["attempt"].append(st.session_state['item_1a'])
     st.subheader(":robot_face: : GPT의 피드백")
     st.text(fb)
-    st.text(f"시도회수 {item1_a}")
+    st.text(f"시도회수 {st.session_state['item_1a']}")
     
 else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
 if st.button("결과 제출하기"):
     st.text(st.session_state["item"][0])
-    # download_results(item, problem, feedback, attempt)
+    download_results(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
 
 st.text("문의 : iss9802@snu.ac.kr")
