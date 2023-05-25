@@ -10,5 +10,5 @@ def generate_csv(item, problem, feedback, attempt):
         "Attempt": attempt
     }
     df = pd.DataFrame(data)
-    csv_data = df.to_csv(index=False, encoding="euc-kr")
+    csv_data = df.to_excel(index=False)
     return csv_data
