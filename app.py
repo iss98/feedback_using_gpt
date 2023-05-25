@@ -33,7 +33,8 @@ st.markdown("$A \div 3y/2 = 4x^{2}y + 2xy +6$ 일 때 다항식 $A$ 를 구하�
 response = st.text_input(label = '답안 :')
 
 if st.button("GPT한테 피드백 받기"):
-    st.session_state['item_1a'] +=1    
+    st.session_state['item_1a'] +=1
+    prompt = prompt_item1 + response    
     fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
     fb = fb["choices"][0]["text"]
     st.session_state["item"].append(1)
