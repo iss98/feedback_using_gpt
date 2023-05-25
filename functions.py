@@ -1,6 +1,6 @@
 import pandas as pd
 
-def generate_csv(item, problem, feedback, attempt):
+def generate_df(item, problem, feedback, attempt):
     data = {
         "Item": item,
         "Problem": problem,
@@ -8,5 +8,4 @@ def generate_csv(item, problem, feedback, attempt):
         "Attempt": attempt
     }
     df = pd.DataFrame(data)
-    csv_data = df.to_csv(index=False).encode('utf-8-sig')
-    return csv_data
+    return df

@@ -48,8 +48,8 @@ if st.button("GPT한테 피드백 받기"):
     
 else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
-if st.button("결과 제출하기"):
-    csv = generate_csv(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
-    st.download_button(label = "Press to Download", data = csv, file_name = "file.csv", mime = "text/csv")
+if st.button("결과 보기"):
+    df = generate_df(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
+    st.dataframe(df)
 
 st.text("문의 : iss9802@snu.ac.kr")
