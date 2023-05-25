@@ -37,7 +37,7 @@ if st.button("GPT한테 피드백 받기"):
     prompt = prompt_item1 + response    
     # fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
     # fb = fb["choices"][0]["text"]
-    fb = "hello"
+    fb = "이제좀되자"
     st.session_state["item"].append(1)
     st.session_state["problem"].append(response)
     st.session_state["feedback"].append(fb)

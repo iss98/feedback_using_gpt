@@ -8,5 +8,5 @@ def generate_csv(item, problem, feedback, attempt):
         "Attempt": attempt
     }
     df = pd.DataFrame(data)
-    csv_data = df.to_csv(index=False).encode("utf-8")
+    csv_data = df.to_csv(index=False).encode('utf-8-sig')
     return csv_data
