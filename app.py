@@ -33,7 +33,8 @@ if st.button("GPT한테 피드백 받기"):
     fb = fb["choices"][0]["text"]
     st.subheader(":robot_face: : GPT의 피드백")
     st.text(fb)
-    item.append("1")
+    st.text(f"시도회수 {item1_a}")
+    item.append(1)
     problem.append(response)
     feedback.append(fb)
     attempt.append(item1_a)
