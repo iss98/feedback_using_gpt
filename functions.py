@@ -10,7 +10,7 @@ def generate_csv(item, problem, feedback, attempt):
         "Attempt": attempt
     }
     df = pd.DataFrame(data)
-    csv_data = df.to_csv(index=False)
+    csv_data = df.to_csv(index=False, encoding="utf-8-sig")
     return csv_data
 
 def download_results(item, problem, feedback, attempt):

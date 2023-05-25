@@ -35,20 +35,20 @@ response = st.text_input(label = '답안 :')
 if st.button("GPT한테 피드백 받기"):
     st.session_state['item_1a'] +=1
     prompt = prompt_item1 + response    
-    fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
-    fb = fb["choices"][0]["text"]
+    # fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
+    # fb = fb["choices"][0]["text"]
+    fb = "안녕하세요"
     st.session_state["item"].append(1)
     st.session_state["problem"].append(response)
     st.session_state["feedback"].append(fb)
     st.session_state["attempt"].append(st.session_state['item_1a'])
     st.subheader(":robot_face: : GPT의 피드백")
-    st.text(fb)
-    st.text(f"시도회수 {st.session_state['item_1a']}")
+    st.write(fb)
+    st.write(f"시도회수 {st.session_state['item_1a']}")
     
 else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
 if st.button("결과 제출하기"):
-    st.text(st.session_state["item"][0])
     download_results(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
 
 st.text("문의 : iss9802@snu.ac.kr")
