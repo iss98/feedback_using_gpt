@@ -12,7 +12,3 @@ def generate_csv(item, problem, feedback, attempt):
     df = pd.DataFrame(data)
     csv_data = df.to_csv(index=False, encoding="utf-8")
     return csv_data
-
-def download_results(item, problem, feedback, attempt):
-    csv = generate_csv(item, problem, feedback, attempt)
-    st.download_button("Press to Download", csv, "file.csv", "text/csv", key='download-csv')
