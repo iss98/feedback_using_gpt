@@ -29,16 +29,17 @@ response = st.text_input(label = '답안 :')
 if st.button("GPT한테 피드백 받기"):
     item1_a +=1
     prompt = prompt_item1 + response
-    fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
-    fb = fb["choices"][0]["text"]
-    st.subheader(":robot_face: : GPT의 피드백")
-    st.text(fb)
-    st.text(f"시도회수 {item1_a}")
+    fb  = "322"    
+    # fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
+    # fb = fb["choices"][0]["text"]
     item.append(1)
     problem.append(response)
     feedback.append(fb)
     attempt.append(item1_a)
-
+    st.subheader(":robot_face: : GPT의 피드백")
+    st.text(fb)
+    st.text(f"시도회수 {item1_a}")
+    
 else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
 if st.button("결과 제출하기"):
