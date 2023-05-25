@@ -29,7 +29,7 @@ response = st.text_input(label = '답안 :')
 if st.button("GPT한테 피드백 받기"):
     item1_a +=1
     prompt = prompt_item1 + response
-    fb = openai.Completion.create(model="text-davinci-003", prompt="Say this is a test", max_tokens=200, temperature=0)
+    fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
     fb = fb["choices"][0]["text"]
     st.subheader(":robot_face: : GPT의 피드백")
     st.text(fb)
