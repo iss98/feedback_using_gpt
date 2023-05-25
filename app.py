@@ -8,10 +8,10 @@ from prompt import *
 openai.api_key = st.secrets["api_key"]
 
 #학생들의 데이터를 다운로드 받기 위한 코드
-item = []
-problem = []
-feedback = []
-attempt = []
+st.session_state["item"] = []
+# problem = []
+# feedback = []
+# attempt = []
 item1_a = 0
 
 #Header of page
@@ -32,10 +32,10 @@ if st.button("GPT한테 피드백 받기"):
     fb  = "322"    
     # fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
     # fb = fb["choices"][0]["text"]
-    item.append(1)
-    problem.append(response)
-    feedback.append(fb)
-    attempt.append(item1_a)
+    st.session_state["item"].append(1)
+    # problem.append(response)
+    # feedback.append(fb)
+    # attempt.append(item1_a)
     st.subheader(":robot_face: : GPT의 피드백")
     st.text(fb)
     st.text(f"시도회수 {item1_a}")
@@ -43,7 +43,7 @@ if st.button("GPT한테 피드백 받기"):
 else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
 if st.button("결과 제출하기"):
-    st.text(item1_a)
-    download_results(item, problem, feedback, attempt)
+    st.text(st.session_state["item"][0])
+    # download_results(item, problem, feedback, attempt)
 
 st.text("문의 : iss9802@snu.ac.kr")
