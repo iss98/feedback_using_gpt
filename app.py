@@ -1,6 +1,5 @@
 import streamlit as st
 import openai
-import pandas as pd
 
 from functions import *
 from prompt import *
@@ -33,7 +32,7 @@ if st.button("GPT한테 피드백 받기"):
     fb = openai.Completion.create(model="text-davinci-003", prompt="Say this is a test", max_tokens=200, temperature=0)
     fb = fb["choices"][0]["text"]
     st.subheader(":robot_face: : GPT의 피드백")
-    st.text(response)
+    st.text(fb)
     item.append("1")
     problem.append(response)
     feedback.append(fb)
