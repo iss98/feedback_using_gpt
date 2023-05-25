@@ -58,7 +58,7 @@ else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
 if st.button("결과 보기"):
     df = generate_df(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
-    csv = df.to_csv(index = False, encoding="cp949", sep='\t')
+    csv = df.to_csv(index = False, encoding="cp949")
     st.download_button(label = "결과 다운로드 받기", data = csv, file_name = "result.csv")
 
 st.text("문의 : iss9802@snu.ac.kr")
