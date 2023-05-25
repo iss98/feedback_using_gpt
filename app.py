@@ -9,7 +9,7 @@ openai.api_key = st.secrets["api_key"]
 
 #학생들의 데이터를 다운로드 받기 위한 코드
 if 'item' not in st.session_state:
-    st.session_state['key'] = []
+    st.session_state['item'] = []
 # st.session_state["item"] = []
 # problem = []
 # feedback = []
