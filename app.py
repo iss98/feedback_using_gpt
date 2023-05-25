@@ -1,6 +1,6 @@
 import streamlit as st
 import openai
-
+import pandas as pd
 from functions import *
 from prompt import *
 
@@ -19,6 +19,15 @@ if 'attempt' not in st.session_state:
 if 'item_1a' not in st.session_state:
     st.session_state['item_1a'] = 0
 
+def generate_df(item, problem, feedback, attempt):
+    data = {
+        "Item": item,
+        "Problem": problem,
+        "Feedback": feedback,
+        "Attempt": attempt
+    }
+    df = pd.DataFrame(data)
+    return df
 
 #Header of page
 st.title("GPT를 활용한 평가 및 피드백 :blue[데모버전]")
