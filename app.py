@@ -1,33 +1,30 @@
 import streamlit as st
-import openai
-import pandas as pd
-from functions import *
 from prompt import *
+from functions import *
 
 #openai api key
 openai.api_key = st.secrets["api_key"]
 
-#학생들의 데이터를 다운로드 받기 위한 코드
-if 'item' not in st.session_state:
-    st.session_state['item'] = []
-if 'problem' not in st.session_state:
-    st.session_state['problem'] = []
-if 'feedback' not in st.session_state:
-    st.session_state['feedback'] = []
-if 'attempt' not in st.session_state:
-    st.session_state['attempt'] = []
-if 'item_1a' not in st.session_state:
-    st.session_state['item_1a'] = 0
+@st.cache_data
+def main():
+    #학생들의 데이터를 다운로드 받기 위한 코드
+    if 'item' not in st.session_state:
+        st.session_state['item'] = []
+    if 'problem' not in st.session_state:
+        st.session_state['problem'] = []
+    if 'feedback' not in st.session_state:
+        st.session_state['feedback'] = []
+    if 'attempt' not in st.session_state:
+        st.session_state['attempt'] = []
+    if 'item_1a' not in st.session_state:
+        st.session_state['item_1a'] = 0
+    if 'item_2a' not in st.session_state:
+        st.session_state['item_2a'] = 0
 
-def generate_df(item, problem, feedback, attempt):
-    data = {
-        "Item": item,
-        "Problem": problem,
-        "Feedback": feedback,
-        "Attempt": attempt
-    }
-    df = pd.DataFrame(data)
-    return df
+name = st.text_input("이름")
+number = st.text_input("번호")
+
+main()
 
 #Header of page
 st.title("GPT를 활용한 평가 및 피드백 :blue[데모버전]")
@@ -39,13 +36,12 @@ st.write("1. 어떤 문제를 활용해야하는지 정하기 \n 2. 어떤 promp
 st.divider()
 st.header("문제 및 피드백 예시")
 st.markdown("$A \div 3y/2 = 4x^{2}y + 2xy +6$ 일 때 다항식 $A$ 를 구하시오")
-response = st.text_input(label = '답안 :')
+response = get_text("input1")
 
-if st.button("GPT한테 피드백 받기"):
+if st.button("GPT한테 피드백 받기", key = "1"):
     st.session_state['item_1a'] +=1
-    prompt = prompt_item1 + response    
-    fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
-    fb = fb["choices"][0]["text"]
+    response = process_string(response)
+    fb = generate_fb(prompt_item1, response)
     st.session_state["item"].append(1)
     st.session_state["problem"].append(response)
     st.session_state["feedback"].append(fb)
@@ -56,9 +52,30 @@ if st.button("GPT한테 피드백 받기"):
     
 else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
 
+st.divider()
+st.header("문제 및 피드백 예시")
+st.markdown("$A \div 3y/2 = 4x^{2}y + 2xy +6$ 일 때 다항식 $A$ 를 구하시오")
+response = get_text("input2")
+
+if st.button("GPT한테 피드백 받기", key = "2"):
+    st.session_state['item_2a'] +=1
+    response = process_string(response)
+    fb = generate_fb(prompt_item1, response)
+    st.session_state["item"].append(2)
+    st.session_state["problem"].append(response)
+    st.session_state["feedback"].append(fb)
+    st.session_state["attempt"].append(st.session_state['item_2a'])
+    st.subheader(":robot_face: : GPT의 피드백")
+    st.write(fb)
+    st.write(f"시도회수 {st.session_state['item_2a']}")
+    
+else : st.text("문제를 푼 후 피드백 받기를 눌러보세요!")
+
+
+
 if st.button("결과 보기"):
     df = generate_df(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
     csv = df.to_csv(index = False, encoding="cp949")
-    st.download_button(label = "결과 다운로드 받기", data = csv, file_name = "result.csv")
+    st.download_button(label = "결과 다운로드 받기", data = csv, file_name = f"{name}_{number}.csv")
 
 st.text("문의 : iss9802@snu.ac.kr")
