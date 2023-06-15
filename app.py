@@ -63,7 +63,7 @@ st.header("2번")
 st.markdown("다음 일차방정식을 푸시오. $0.3x + 2 = 0.1x + 0.8$")
 response = st.text_input("풀이 : ", key = "input2")
 
-if st.button("피드백 받기", key = "1"):
+if st.button("피드백 받기", key = "2"):
     st.session_state['item_2a'] +=1
     response = process_string(response)
     fb = generate_fb(prompt2, response)
