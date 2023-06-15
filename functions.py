@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import openai
 
+@st.cache_data
 def generate_df(item, problem, feedback, attempt):
     data = {
         "Item": item,
@@ -12,18 +13,15 @@ def generate_df(item, problem, feedback, attempt):
     df = pd.DataFrame(data)
     return df
 
+@st.cache_resource
 def process_string(text):
     text = text.strip()
     text = text.replace(","," ")
     return text
 
-def get_text(key):
-    input_text = st.text_input("답안 : ", key = key)
-    return input_text
-
-def generate_fb(prompt, response):
-    prompt = prompt + response    
-    fb = openai.Completion.create(model="text-davinci-003", prompt=prompt, max_tokens=200, temperature=0)
-    fb = fb["choices"][0]["text"]
+@st.cache_resource
+def generate_fb(prompt, response):    
+    fb =openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", messages=[{"role": "system", "content": prompt}, {"role": "user", "content": response}])
+    fb = fb.choices[0].message.content
     fb = process_string(fb)
     return fb
