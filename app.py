@@ -27,11 +27,11 @@ if 'item_4a' not in st.session_state:
 if 'item_5a' not in st.session_state:
     st.session_state['item_5a'] = 0
 
-name = st.text_input("이름")
-number = st.text_input("번호")
 
 #Header of page
 st.title("일차방정식 풀이 및 활용 문제")
+name = st.text_input("이름")
+number = st.text_input("번호")
 st.divider()
 st.header("문제를 풀고 피드백 받는 순서!")
 st.write("1. 이름과 번호를 페이지의 가장 위에 입력해주세요")
