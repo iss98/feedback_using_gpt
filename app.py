@@ -43,8 +43,8 @@ st.markdown("[구글 설문 링크](https://forms.gle/qhKB7WkYcxFwn4gL9)")
 
 st.divider()
 st.header("1번")
-st.markdown("다음 일차방정식을 푸시오 $2x + 13 = -3x -12$")
-response = st.text_input("풀이 : ", key = "input1")
+st.markdown("다음 일차방정식을 푸시오. $2x + 13 = -3x -12$")
+response = st.text_input("풀이과정과 함께 답을 쓰시오 : ", key = "input1")
 
 if st.button("피드백 받기", key = "1"):
     st.session_state['item_1a'] +=1
@@ -63,7 +63,7 @@ else : st.text("문제를 풀고 피드백 받기를 눌러보세요!")
 st.divider()
 st.header("2번")
 st.markdown("다음 일차방정식을 푸시오. $0.3x + 2 = 0.1x + 0.8$")
-response = st.text_input("풀이 : ", key = "input2")
+response = st.text_input("풀이과정과 함께 답을 쓰시오 : ", key = "input2")
 
 if st.button("피드백 받기", key = "2"):
     st.session_state['item_2a'] +=1
@@ -82,8 +82,8 @@ else : st.text("문제를 풀고 피드백 받기를 눌러보세요!")
 
 st.divider()
 st.header("3번")
-st.markdown("연속한 두 수의 합이 $59$일 때, 큰 수를 구하세요.")
-response = st.text_input("풀이 : ", key = "input3")
+st.markdown("연속한 두 수의 합이 $59$일 때, 큰 수를 구하시오.")
+response = st.text_input("풀이과정과 함께 답을 쓰시오 : ", key = "input3")
 
 if st.button("피드백 받기", key = "3"):
     st.session_state['item_3a'] +=1
@@ -101,8 +101,8 @@ else : st.text("문제를 풀고 피드백 받기를 눌러보세요!")
 
 st.divider()
 st.header("4번")
-st.markdown("연속하는 세 자연수의 합이 $30$일 때, 이 세 자연수 중에서 가장 큰 자연수의 값을 자세한 설명과 함께 구하시오.")
-response = st.text_input("풀이 : ", key = "input4")
+st.markdown("연속하는 세 자연수의 합이 $30$일 때, 이 세 자연수 중에서 가장 큰 자연수를 구하시오.")
+response = st.text_input("풀이과정과 함께 답을 쓰시오 : ", key = "input4")
 
 if st.button("피드백 받기", key = "4"):
     st.session_state['item_4a'] +=1
@@ -121,8 +121,8 @@ else : st.text("문제를 풀고 피드백 받기를 눌러보세요!")
 st.divider()
 
 st.header("5번")
-st.markdown("하민이와 민혁이는 종이를 접어 장미꽃을 만들기로 하였다. 하민이는 10분에 장미꽃 4송이를, 민혁이는 12분에 장미꽃 6송이를 만들 수 있다. 하민이와 민혁이가 집에서 각각 장미꽃 16송이와 12송이를 미리 만들어 와서 동시에 장미꽃을 만들기 시작하였다. 두 사람의 장미꽃의 개수가 같아지는 것은 장미꽃을 만들기 시작한 지 몇 분 후인지 구하고, 그 풀이 과정을 쓰시오.")
-response = st.text_input("풀이 : ", key = "input5")
+st.markdown("하민이와 민혁이는 종이를 접어 장미꽃을 만들기로 하였다. 하민이는 10분에 장미꽃 4송이를, 민혁이는 12분에 장미꽃 6송이를 만들 수 있다. 하민이와 민혁이가 집에서 각각 장미꽃 16송이와 12송이를 미리 만들어 와서 동시에 장미꽃을 만들기 시작하였다. 두 사람의 장미꽃의 개수가 같아지는 것은 장미꽃을 만들기 시작한 지 몇 분 후인지 구하시오.")
+response = st.text_input("풀이과정과 함께 답을 쓰시오 : ", key = "input5")
 
 if st.button("피드백 받기", key = "5"):
     st.session_state['item_5a'] +=1
@@ -145,3 +145,7 @@ if st.button("결과 다운로드받기"):
     df = generate_df(st.session_state["item"], st.session_state["problem"], st.session_state["feedback"], st.session_state["attempt"])
     csv = df.to_csv(index = False, encoding="cp949")
     st.download_button(label = "눌러서 파일 다운로드 받기", data = csv, file_name = f"{name}.csv")
+
+st.divider()
+st.write("6. 다운로드 받은 파일을 아래의 링크에 들어가서 설문과 함께 제출해주세요")
+st.markdown("[구글 설문 링크](https://forms.gle/qhKB7WkYcxFwn4gL9)")
