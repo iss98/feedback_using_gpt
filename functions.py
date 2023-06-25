@@ -23,5 +23,4 @@ def process_string(text):
 def generate_fb(prompt, response):    
     fb =openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", messages=[{"role": "system", "content": prompt}, {"role": "user", "content": response}])
     fb = fb.choices[0].message.content
-    fb = process_string(fb)
     return fb
