@@ -106,7 +106,7 @@ if st.button("피드백 받기", key = "3"):
     response3 = process_string(response3)
     asess = process_string(assess)
     fb = process_string(fb)
-    st.session_state["item"].append("2")
+    st.session_state["item"].append("3")
     st.session_state["answer"].append(response3)
     st.session_state["assess"].append(assess)
     st.session_state["feedback"].append(fb)
@@ -120,8 +120,8 @@ st.subheader("학습활동기록")
 if st.session_state["item"] != []:
     for i, a in enumerate(st.session_state["item"]):
         st.write(a + "번문제")
-        st.write(":student: : " + st.session_state["answer"][i])
-        st.write(":robot_face: : " + st.session_state["feedback"][i])
+        st.code(":student: : " + st.session_state["answer"][i])
+        st.code(":robot_face: : " + st.session_state["feedback"][i])
         
 st.divider()
 
@@ -132,5 +132,5 @@ if st.button("결과 다운로드받기"):
     st.download_button(label = "눌러서 파일 다운로드 받기", data = csv, file_name = f"{name}.csv")
 
 st.divider()
-st.write("7. 다운로드 받은 파일을 아래의 링크에 들어가서 설문과 함께 제출해주세요")
+st.header("결과 다운로드 받은 후 구글 설문 링크")
 st.markdown("[구글 설문 링크](https://forms.gle/iHcKtEtt1eQi8y5f6)")
