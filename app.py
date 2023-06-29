@@ -120,8 +120,8 @@ st.subheader("학습활동기록")
 if st.session_state["item"] != []:
     for i, a in enumerate(st.session_state["item"]):
         st.write(a + "번문제")
-        st.info(code_print(":student: : " + st.session_state["answer"][i]))
-        st.warning(code_print(":robot_face: : " + st.session_state["feedback"][i]))
+        st.info(code_print("👨‍🎓 :" + st.session_state["answer"][i]))
+        st.warning(code_print("💬 :" + st.session_state["feedback"][i]))
         
 st.divider()
 
