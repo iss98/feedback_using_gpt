@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import openai
 from prompt import *
+import re
 
 @st.cache_data
 def generate_df(item, answer, assess, feedback, conf, sat):
@@ -51,3 +52,7 @@ def generate_fb_3(response):
     fb = openai.ChatCompletion.create(model="gpt-3.5-turbo-0613", messages=[{"role": "system", "content": prompt3_feedback}, {"role": "user", "content": response}])
     fb = fb.choices[0].message.content
     return assess, fb
+
+@st.cache_resource
+def code_print(x):
+    return re.sub(r"([_*])", r"\\\1", x)
